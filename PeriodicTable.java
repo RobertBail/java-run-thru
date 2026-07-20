@@ -3,7 +3,7 @@
  *
  * Periodic Table Printer Class
  *
- * @author <<Robert Bailey, 961231 Insert student IDs and names here>>
+ * @author Robert Bailey, 961231 Insert student IDs and names here
  * @version <<Insert date of completion here>>
  */
 
@@ -30,27 +30,8 @@ public class PeriodicTable implements PeriodicTableInterface
     protected final DecimalFormat FMT=new DecimalFormat("000");
     
     // Non-final Instance Variables
-    
-public PeriodicTable()
-{
+
     /**  
-     * calling and initiating Scanner, this import
-     */
-
-
-    /**
-     * setting the start, stop, and show instance variables by obtaining information from the user via prompts,
-     * along with handling errorneous/unexpected entries by the user
-     */
-
-
-
-}
-
-
-    
-    
-    /** 
      * PeriodicTable() -- Constructor
 
      * Pre-condition: none
@@ -60,7 +41,26 @@ public PeriodicTable()
      */
     public PeriodicTable()
     {
-// COMPLETE ME!
+    /**  
+     * calling and initiating Scanner, this import
+     */
+        Scanner sc = new Scanner(System.in);    // mechanism for user input
+         
+        // Declaring local variables       
+        String userInput;
+         
+         //obtaining the necessary user input
+        System.out.print("Print the Lanthanum or Actinium groups if necessary [Y/N]? ");
+        userInput = sc.nextLine();
+
+    /**
+     * setting the start, stop, and show instance variables by obtaining information from the user via prompts,
+     * along with handling errorneous/unexpected entries by the user
+     */
+         // like this (below?)
+        boolean show = userInput.equalsIgnoreCase("Y");
+
+        sc.close();
     }
     
     
@@ -71,6 +71,11 @@ public PeriodicTable()
      * Post-condition: the (excerpt of) the periodic table from elements between the range of start and stop (excluding the lanthanum
      *                 and actinium groups) has been printed and if this range includes those groups then the relevant instance
      *                 variable (printLan or printAct) is true, otherwise it/these are false
+     */
+    
+    
+    /**
+     * Insertion at front?
      */
     public void printTable()
     {
