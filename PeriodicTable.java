@@ -33,19 +33,26 @@ public class PeriodicTable implements PeriodicTableInterface
     
 public PeriodicTable()
 {
-   
-    
     /**  
-     * calling Scanner, this import
+     * calling and initiating Scanner, this import
+     */
+
+
+    /**
+     * setting the start, stop, and show instance variables by obtaining information from the user via prompts,
+     * along with handling errorneous/unexpected entries by the user
      */
 
 
 
 }
 
-    /**
+
+    
+    
+    /** 
      * PeriodicTable() -- Constructor
-     * calling Scanner, this import
+
      * Pre-condition: none
      * Post-condition: the instance variable show is set to true if printing of the lanthanum and actinium groups is desired and false
      *                 otherwise; start is given the atomic number of the first element to display; stop is given the atomic number of
