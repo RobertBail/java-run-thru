@@ -3,7 +3,7 @@
  *
  * Periodic Table Printer Class
  *
- * @author <<Insert student IDs and names here>>
+ * @author <<Robert Bailey, 961231 Insert student IDs and names here>>
  * @version <<Insert date of completion here>>
  */
 
