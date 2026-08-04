@@ -30,6 +30,11 @@ public class PeriodicTable implements PeriodicTableInterface
     protected final DecimalFormat FMT=new DecimalFormat("000");
     
     // Non-final Instance Variables
+    protected int start;
+    protected int stop;
+    protected boolean show;
+    protected boolean printLan;
+    protected boolean printAct;
 
     /**  
      * PeriodicTable() -- Constructor
@@ -41,25 +46,45 @@ public class PeriodicTable implements PeriodicTableInterface
      */
     public PeriodicTable()
     {
-    /**  
-     * calling and initiating Scanner, this import
-     */
+     
+        //calling and initiating Scanner, this import    
         Scanner sc = new Scanner(System.in);    // mechanism for user input
-         
-        // Declaring local variables       
-        String userInput;
-         
-         //obtaining the necessary user input
-        System.out.print("Print the Lanthanum or Actinium groups if necessary [Y/N]? ");
-        userInput = sc.nextLine();
+         // Declaring local variables 
+        System.out.print("Print the Lanthanum/Actinium groups if necessary [Y/N]? ");
+        String userInput = sc.nextLine();        
+             
+        if (userInput.equalsIgnoreCase("Y") || userInput.equalsIgnoreCase("YES"))
+        {
+            show = true;
+        }
+        else
+        {
+            show = false;
+            System.out.println("...N assumed...");
+        }
 
-    /**
-     * setting the start, stop, and show instance variables by obtaining information from the user via prompts,
-     * along with handling errorneous/unexpected entries by the user
-     */
-         // like this (below?)
-        boolean show = userInput.equalsIgnoreCase("Y");
+        System.out.print("Enter number of first element to print: ");
+        start = sc.nextInt();
+       //referring to 'start' int, ie. integers/element group numbers in TABLE[][]
+        if (start < 1 || start > 118)
+        {
+            start = 1;
+            System.out.println("...1 assumed...");
+        }
 
+        System.out.print("Enter number of last element to print: ");
+        stop = sc.nextInt();
+        //referring to 'stop' int, ie. integers/element group numbers in TABLE[][]
+        if (stop < start || stop > 118)
+        {
+            stop = 118;
+            System.out.println("...118 assumed...");
+        }
+        // these kept at false otherwise
+        printLan = false;
+        printAct = false;
+
+        // Close the scanner
         sc.close();
     }
     
@@ -67,20 +92,58 @@ public class PeriodicTable implements PeriodicTableInterface
     /**
      * printTable() -- display (excerpt of) periodic table
      *
-     * Pre-condition: instance variabls start and stop have been validly defined
+     * Pre-condition: instance variables start and stop have been validly defined
      * Post-condition: the (excerpt of) the periodic table from elements between the range of start and stop (excluding the lanthanum
      *                 and actinium groups) has been printed and if this range includes those groups then the relevant instance
      *                 variable (printLan or printAct) is true, otherwise it/these are false
      */
     
-    
-    /**
-     * Insertion at front?
-     */
     public void printTable()
-    {
-// COMPLETE ME!
-    }
+    {   // initiating 'relevantGroup' from 1
+        int relevantGroup = 1;
+        // i meaning "index", "iterator" or "integer", the 'index' of TABLE[][]
+        //'for loop' defining/establishing the "i" for the 'start' and 'stop' integers, and the i++ which increases the value of i by 1
+        for (int i = start; i <= stop; i++)
+        {
+            int group = Integer.parseInt(TABLE[i - 1][1]);
+           //(above) referring to the "int" group number in 'TABLE[][]'
+        // Lanthanides, referring to the element/group numbers from 'TABLE[][]=' above, ie. {"La","-11"} to {"Lu","-25"}
+            if (group <= -11 && group >= -25)
+            {
+                printLan = true;
+                continue;
+            }
+
+        // Actinides, referring to the element/group numbers from 'TABLE[][]=' above, ie. {"Ac","-31"} to {"Lr","-45"}
+            if (group <= -31 && group >= -45)
+            {
+                printAct = true;
+                continue;
+            }
+
+            while (relevantGroup < group)
+            {
+                System.out.print("\t");
+                relevantGroup++;
+            //the values of additional 'relevantGroup/s'
+            }
+
+                System.out.print(FMT.format(i) + " " + TABLE[i - 1][0]);
+        //referring to {"Uuo","18"} in TABLE
+            if (group == 18)
+            {
+                System.out.println();
+                relevantGroup = 1;
+            }
+            else
+            {
+                System.out.print("\t");
+                relevantGroup++;
+            }
+        }
+
+        System.out.println();
+}
     
     
     /**
@@ -92,6 +155,36 @@ public class PeriodicTable implements PeriodicTableInterface
      */
     public void printGroups()
     {
-// COMPLETE ME!
+        if (show && printLan)
+        {
+            System.out.println("Lanthanum Group:");
+             // referring to the elements of the Lanthanum Group between 57 and 71
+            for (int i = 57; i <= 71; i++)
+            {
+                if (i >= start && i <= stop)
+                {
+                    System.out.print(FMT.format(i) + " ");
+                    System.out.print(TABLE[i - 1][0] + "\t");
+                }
+            }
+
+            System.out.println();
+        }
+
+        if (show && printAct)
+        {
+            System.out.println("Actinium Group:");
+             // referring to the elements of the Actinium Group between 89 and 103
+            for (int i = 89; i <= 103; i++)
+            {
+                if (i >= start && i <= stop)
+                {
+                    System.out.print(FMT.format(i) + " ");
+                    System.out.print(TABLE[i - 1][0] + "\t");
+                }
+            }
+
+            System.out.println();
     }
+}
 }
